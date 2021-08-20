@@ -25,13 +25,18 @@
     overflow: hidden;
     position: relative;
     width: 900px;
+
     height: 550px;
     background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
   }
   .ac{
     margin-top: 5%;
-      width: 260px;
+      width: 210px;
+
     height: 36px;
     border-radius: 30px;
     color: #fff;
@@ -328,3 +333,5 @@
     -webkit-transform:translate3d(0, 0, 0);
             transform:translate3d(0, 0, 0);
   }
+
+  

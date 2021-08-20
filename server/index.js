@@ -29,7 +29,7 @@ app.post('/contact',(req,res) =>{
     res.status(200).send(Contacts)
 
 })
-.get('/contact/delete/:id',async (req,res) =>{
+.delete('/contact/delete/:id',async (req,res) =>{
     const id=req.params.id
     Contact.deleteOne({_id:id}).then(()=>{
         res.status(200).send({messge:'Record deleted'})

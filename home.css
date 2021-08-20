@@ -203,3 +203,9 @@ html{
 .container {
   padding:100px;
 }
+
+.del_btn{
+  padding:12px;
+  background-color: tomato;
+  cursor: pointer;
+}
