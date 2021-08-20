@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
+    <!-- <nav>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
           <i class="fas fa-bars"></i>
@@ -25,36 +25,36 @@
           <li><a href="admin.html">Admin</a></li>
         </ul>
       </b>
-      </nav>
+      </nav> -->
   <div class="cont">
     <div class="form sign-in">
       <h2>Sign In</h2>
-      <form onsubmit="alert(' Signed In successfully ')">
+      <form>
       <label>
         <span>Email Address</span>
-        <input type="email" name="email" required>
+        <input type="text" name="email" id="email">
       </label>
       <label>
         <span>Password</span>
-        <input type="password" name="password" maxlength="10" minlength="6" required pattern="[A-Za-z0-9@]{1,10}" title="Password should be 6-10 characters and can include uppercase letters,lowercase letters,numbers and @ only ">
+        <input type="password" name="password" maxlength="10" minlength="6" title="Password should be 6-10 characters and can include uppercase letters,lowercase letters,numbers and @ only " id="password">
       </label>
       <button class="submit" type="submit">Sign In</button>
-      <p class="forgot-pass">Forgot Password ?</p><br>
+      
       <div class="anc">
-        <button class="ac"><a href="lg.html">Return to Home Page</a></button>
+        <button class="ac"><a href="/">Return to Home Page</a></button>
       </div>
-
-      <div class="social-media">
+      <!-- <div class="social-media">
         <ul>
           <li><a href="https://www.facebook.com/login"><img src="facebook.png"></a></li>
           <li><a href="https://twitter.com/login?lang=en"><img src="twitter.png"></a></li>
           <li><a href="https://www.linkedin.com/login"><img src="linkedin.png"></a></li>
           <li><a href="https://www.instagram.com/"><img src="instagram.png"></a></li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </form>
-    <div class="sub-cont">
+  
+    <!-- <div class="sub-cont">
       <div class="img">
         <div class="img-text m-up">
           <h2>New here?</h2>
@@ -89,13 +89,51 @@
           <input type="tel" maxlength="10" required pattern="[0-9]{1,10}">
         </label>
         <button type="submit" class="submit">Sign Up Now</button>
-        <div class="anc">
-          <button class="ac"><a href="lg.html">Return to Home Page</a></button>
-        </div>
+        
       </form>
+      <div class="anc">
+        <button class="ac"><a href="/">Return to Home Page</a></button>
       </div>
-    </div>
+      </div>
+    </div> -->
   </div>
-<script type="text/javascript" src="loginpage.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js" integrity="sha512-Meww2sXqNHxI1+5Dyh/9KAtvI9RZSA4c1K2k5iL02oiPO/RH3Q30L3M1albtqMg50u4gRTYdV4EXOQqXEI336A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <script>
+    // get a form
+
+    const form = document.querySelector('form');
+    
+
+    form.addEventListener('submit',(e)=>{
+      e.preventDefault();
+      console.log('working!...')
+      const email = document.querySelector('#email').value;
+      const password = document.querySelector('#password').value;
+      console.log(email,password);
+    
+
+    if(!email || !password){
+      alert('All field required!');
+      return form.reset();
+    }
+
+    Cookies.set('IS_LOGIN',true);
+    window.location.href="/";
+
+    // if(email !=="admin@mail" && password !=="admin123"){
+    //    alert("Invalid Admin Credidentials!");
+    //    return form.reset();
+    // }
+
+    // if(email ==="admin@mail" && password==="admin123"){
+    //   Cookies.set('IS_LOGIN',true);
+    //   // window.location.href="/";
+    // }
+    })
+
+    
+  </script>
 </body>
 </html>
