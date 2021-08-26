@@ -3,7 +3,7 @@ const cors = require('cors')
 const app=express()
 const Contact=require('./models/Contact')
 const mongoose=require('mongoose')
-const { request } = require('express')
+const { request, response } = require('express')
 app.use(express.json())
 app.use(cors())
 mongoose.connect('mongodb+srv://user:user123@cluster0.fmdc4.mongodb.net/origin',{
@@ -39,11 +39,27 @@ app.post('/contact',(req,res) =>{
 
 })
 .post('/contact/search',async (req,res) =>{
-    const query=req.body.query
-    const records=await Contact.find({name:query})
+    const query=req.body.key
+    const records=await Contact.find({ "name" : { $regex: query } }).sort('name')
+
+    console.log(records);
     res.status(200).send(records)
 })
+.get('/contact/sort/name',async (req,res)=>{
+    
 
+    const responses = await Contact.find().sort('name');
+    console.log(responses);
+    res.status(200).send(responses)
+})
+.
+get('/contact/sort/subject',async (req,res)=>{
+    
+
+    const responses = await Contact.find().sort('subject');
+    console.log(responses);
+    res.status(200).send(responses)
+})
 
 const port=process.env.PORT||5000
 app.listen(port,() => {
