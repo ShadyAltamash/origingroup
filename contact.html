@@ -54,7 +54,7 @@
             if(name||email||subject||enq)
               {
                 console.log(name,email,subject,enq)
-                axios.post('http://localhost:5000/contact',{
+                axios.post('https://mysterious-springs-89971.herokuapp.com/contact',{
                   name,email,subject,enq
                 }).then((response)=>{
                   console.log(response)
