@@ -5,7 +5,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>All Responses</title>
+
+    <style>
+        .response__header{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .response-card{
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+        }
+        .response__detail{
+            display: flex;
+            flex-direction: column;
+        }
+        .response__detail > span{
+            display: block;
+            width: 100%;
+        }
+
+        .search__bar{
+            width: 350px;
+            height: 48px;
+            background-color: #fff;
+            border-radius: 65px;
+            display: flex;
+            align-items: center;
+            padding-left: 15px;
+        }
+
+        .search__bar input{
+            width: 90%;
+            height: 40px;
+            border: 0;
+            outline: 0;
+            padding-left: 10px;
+        }
+        .container__header{
+            display: flex;
+            align-items: center;
+            gap:10px;
+            margin-bottom: 35px;
+        }
+        .search_btn{
+            width: 130px;
+            height: 48px;
+            background-color: blue;
+            border-radius: 65px;
+            border: 0;
+            outline: 0;
+            cursor: pointer;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -17,19 +76,36 @@
         
         <label class="logo">Origin Training</label>
         <ul>
-            <li><a class="active" href="/">Home</a></li>
+            <li><a  href="/">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="testimonials.html">Testimonials</a></li>
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="contact.html">Contact us</a></li>
-            <li><a href="admin.html" id="dynamic-link">Admin Login</a></li>
+            <li><a href="admin.html" id="dynamic-link" class="active">Admin Login</a></li>
         </ul>
       </b>
       </nav>
     <div class="card">
         <!--<h2>Objectives and Training Activities by OG(Origin Group)</h2>-->
       <div class="container">
-        <h4><b>All Responses</b></h4> 
+
+        <div class="container__header">
+            <div class="search__bar">
+                <i class="fas fa-search"></i> <input type="search" name="skey" id="skey" placeholder="Enter Keyword" class="search">
+            </div>
+
+            <button class="search_btn" onClick="handleSearch()">Search</button>
+        </div>
+        <div class="response__header">
+            <h4><b>All Responses <strong class="response_count"></strong></b></h4> 
+            <div class="sort__header">
+                <span>Sort By:</span>
+                <select name="sort" id="sort" onchange="handleSort()" class="sort">
+                    <option value="name">By Name</option>
+                    <option value="subject">By Subject</option>
+                </select>
+            </div>
+        </div>
             
   
             
@@ -69,13 +145,19 @@ window.onload = ()=>{
                 const {data} = response;
 
 
+                document.querySelector('.response_count').textContent = `(${data.length})`;
+
+
 
 
                 data.forEach((r)=>{
                     responseContainer.innerHTML+=`
                     <div class="response-card">
-                        <h3>${r.enq}</h3>
-                        <span>Upload by:${r.name}</span>
+                        <div className="response__detail">
+                            <h3>${r.enq}</h3>
+                            <span>Upload by:${r.name}</span>
+                            <span>${r.email}</span>
+                        </div>
                         <button class="del_btn" id="${r._id}"">Delete</button>
                     </div>`;
                 })
@@ -121,22 +203,82 @@ window.onload = ()=>{
           document.getElementById('dynamic-link').textContent="View Data";
           document.getElementById('dynamic-link').setAttribute('href','data.html');
         }
+        else{
+            window.location.href="/";
+        }
+
+
+
+
       }
 
 
 
-      // logout functionality
+      
 
-      const logout_link = document.querySelector('#dynamic-link').textContent;
 
-     document.querySelector('#dynamic-link').addEventListener('click',()=>{
-       console.log('working')
-       console.log(logout_link)
-      if(logout_link==="Logout"){
-        Cookies.remove('IS_LOGIN');
-        window.location.href="/";
-      }
-     })
+     //handle sorting
+
+     const handleSort = ()=>{
+         const sort_key = document.querySelector('.sort').value;
+        console.log(sort_key);
+        const url = `http://localhost:5000/contact/sort/${sort_key}`
+         axios.get(url).then((response)=>{
+             console.log(response);
+
+             const {data} = response;
+             responseContainer.innerHTML='';
+
+             data.forEach((r)=>{
+                    responseContainer.innerHTML+=`
+                    <div class="response-card">
+                        <div className="response__detail">
+                            <h3>${r.enq}</h3>
+                            <span>Upload by:${r.name}</span>
+                            <span>${r.email}</span>
+                        </div>
+                        <button class="del_btn" id="${r._id}"">Delete</button>
+                    </div>`;
+                })
+
+
+
+         }).catch((e)=>{
+             console.log(e);
+         })
+     }
+
+
+
+     const handleSearch = (e)=>{
+         const key = document.querySelector('.search').value;
+
+        
+
+         axios.post('http://localhost:5000/contact/search',{
+             key:key
+         }).then((response)=>{
+             console.log(response);
+             const {data} = response;
+             responseContainer.innerHTML='';
+
+             data.forEach((r)=>{
+                    responseContainer.innerHTML+=`
+                    <div class="response-card">
+                        <div className="response__detail">
+                            <h3>${r.enq}</h3>
+                            <span>Upload by:${r.name}</span>
+                            <span>${r.email}</span>
+                        </div>
+                        <button class="del_btn" id="${r._id}"">Delete</button>
+                    </div>`;
+                })
+
+
+         }).catch((e)=>{
+             console.log(e.message);
+         })
+     }
     </script>
 </body>
 </html>
