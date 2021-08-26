@@ -139,7 +139,7 @@ window.onload = ()=>{
 
 
         const getResponses  = async ()=>{
-            axios.get('http://localhost:5000/contact').then((response)=>{
+            axios.get('https://mysterious-springs-89971.herokuapp.com/contact').then((response)=>{
                 console.log(response.data);
 
                 const {data} = response;
@@ -173,7 +173,7 @@ window.onload = ()=>{
             button.addEventListener('click',(e)=>{
                 console.log('Working...')
                 console.log(e.target.id);
-            axios.delete(`http://localhost:5000/contact/delete/${e.target.id}`).then((response)=>{
+            axios.delete(`https://mysterious-springs-89971.herokuapp.com/contact/delete/${e.target.id}`).then((response)=>{
                 if(response.status===200){
                     alert('Record Deleted!');
                     return window.location.href="data.html";
@@ -222,7 +222,7 @@ window.onload = ()=>{
      const handleSort = ()=>{
          const sort_key = document.querySelector('.sort').value;
         console.log(sort_key);
-        const url = `http://localhost:5000/contact/sort/${sort_key}`
+        const url = `https://mysterious-springs-89971.herokuapp.com/contact/sort/${sort_key}`
          axios.get(url).then((response)=>{
              console.log(response);
 
@@ -255,7 +255,7 @@ window.onload = ()=>{
 
         
 
-         axios.post('http://localhost:5000/contact/search',{
+         axios.post('https://mysterious-springs-89971.herokuapp.com/contact/search',{
              key:key
          }).then((response)=>{
              console.log(response);
