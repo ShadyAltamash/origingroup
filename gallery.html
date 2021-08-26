@@ -1,0 +1,140 @@
+<!--automatic slidshow-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="gallery.css">
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    .column {
+      float: left;
+      width: 33.33%;
+      padding: 5px;
+    }
+    
+    /* Clearfix (clear floats) */
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    </style>
+</head>
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+          <i class="fas fa-bars"></i>
+        </label> <b>  
+        <label class="logo">Origin Training</label>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a class="active" href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="admin.html" id="dynamic-link">Admin Login</a></li>
+        </ul>
+      </b>
+    </nav>
+      <br><br><br><br>
+<!--<h2>Gallery</h2>-->
+<div  style="text-align: center;" class="slideshow-container">
+
+<div class="mySlides fade">
+  <div class="numbertext">1 / 6 </div>
+  <img src="pic1.jpg">
+  <!--<div class="text">Caption Text</div>-->
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 6</div>
+  <img src="pic2.jpg" >
+  <!--<div class="text">Caption Two</div>-->
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 6</div>
+  <img src="pic3.jpg" >
+  <!--<div class="text">Caption Three</div>-->
+</div>
+
+<div class="mySlides fade">
+    <div class="numbertext">4 / 6</div>
+    <img src="pic4.jpeg" >
+    <!--<div class="text">Caption Four</div>-->
+</div>
+
+<div class="mySlides fade">
+    <div class="numbertext">5 / 6</div>
+    <img src="pic5.jpg" >
+</div>
+
+<div class="mySlides fade">
+    <div class="numbertext">6 / 6</div>
+    <img src="pic6.jpg" >
+</div>
+  
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span>
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+</div>
+<br>
+
+<div class="row">
+    <div class="column">
+      <img src="pic1.jpg" alt="Snow" style="width:100%">
+    </div>
+    <div class="column">
+      <img src="pic2.jpg" alt="Forest" style="width:100%">
+    </div>
+    <div class="column">
+      <img src="pic3.jpg" alt="Mountains" style="width:100%">
+    </div>
+    <div class="column">
+        <img src="pic4.jpeg" alt="Mountains" style="width:100%">
+      </div>
+    <div class="column">
+        <img src="pic5.jpg" alt="Mountains" style="width:100%">
+    </div>
+    <div class="column">
+        <img src="pic6.jpg" alt="Mountains" style="width:100%">
+      </div>
+  </div>
+
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 3000); // Change image every 2 seconds
+}
+</script>
+
+</body>
+</html> 

@@ -17,17 +17,17 @@
         
         <label class="logo">Origin Training</label>
         <ul>
-          <li><a class="active" href="/">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="testimonials.html">Testimonials</a></li>
-          <li><a href="#">Gallery</a></li>
-          <li><a href="contact.html">Contact us</a></li>
-          <li><a href="admin.html" id="dynamic-link">Admin Login</a></li>
+            <li><a class="active" href="/">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+            <li><a href="admin.html" id="dynamic-link">Admin Login</a></li>
         </ul>
       </b>
       </nav>
     <div class="card">
-        <h2>Objectives and Training Activities by OG(Origin Group)</h2>
+        <!--<h2>Objectives and Training Activities by OG(Origin Group)</h2>-->
       <div class="container">
         <h4><b>All Responses</b></h4> 
             
@@ -110,6 +110,33 @@ window.onload = ()=>{
         getResponses();
 
 
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js" integrity="sha512-Meww2sXqNHxI1+5Dyh/9KAtvI9RZSA4c1K2k5iL02oiPO/RH3Q30L3M1albtqMg50u4gRTYdV4EXOQqXEI336A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+
+
+      window.onload = ()=>{
+        if(Cookies.get('IS_LOGIN')){
+          document.getElementById('dynamic-link').textContent="View Data";
+          document.getElementById('dynamic-link').setAttribute('href','data.html');
+        }
+      }
+
+
+
+      // logout functionality
+
+      const logout_link = document.querySelector('#dynamic-link').textContent;
+
+     document.querySelector('#dynamic-link').addEventListener('click',()=>{
+       console.log('working')
+       console.log(logout_link)
+      if(logout_link==="Logout"){
+        Cookies.remove('IS_LOGIN');
+        window.location.href="/";
+      }
+     })
     </script>
 </body>
 </html>
